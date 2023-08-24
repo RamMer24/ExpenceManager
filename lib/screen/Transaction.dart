@@ -1,6 +1,7 @@
 
 
 import 'package:expencemanager/Helpers/Databasehandler.dart';
+import 'package:expencemanager/screen/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -34,9 +35,24 @@ class _transactionState extends State<transaction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      title: Center(child: Text("Addtransaction",style: TextStyle(fontSize: 30),)),
+      appBar:AppBar(
+        title: Center(child: Text('Add Traslation',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)),
+
+    backgroundColor: Colors.blue.shade100, // Background color
+    elevation: 4.0,
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(
+    bottom: Radius.circular(30), // Rounded corners at the bottom
+    )),
+    flexibleSpace: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+          colors: [Colors.teal, Colors.teal.shade100],
+        ),
       ),
+    ),),
       body: SingleChildScrollView(
       child: Form(
         key: formkey,
@@ -48,14 +64,18 @@ class _transactionState extends State<transaction> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Radio(
-                    value: "income",
+                    fillColor: MaterialStateColor.resolveWith((states) => Colors. teal.shade500),
+                    focusColor: MaterialStateColor.resolveWith((states) => Colors.teal.shade500),
+                    value: "Income",
                     groupValue: grp,
                     onChanged: _handalRadio,
-
                   ),
+
                   Text("Income"),
                   Radio(
-                    value: "expense",
+                    fillColor: MaterialStateColor.resolveWith((states) => Colors. teal.shade500),
+                    focusColor: MaterialStateColor.resolveWith((states) => Colors.teal.shade500),
+                    value: "Expense",
                     groupValue: grp,
                     onChanged: _handalRadio,
 
@@ -63,45 +83,76 @@ class _transactionState extends State<transaction> {
                   Text("Expense"),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("category"),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  DropdownButton(
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 5),
+                child: Container(
+                  height: 60,
+                  width: 370,
+                  child: DropdownButtonFormField(
+                    borderRadius: BorderRadius.circular(30),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.black)),
+                      disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.black)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.black)),
+                      // filled: true,
+                      hintStyle: TextStyle(
+                        // color: Colors.grey[800]
+                      ),
+                      hintText: "Select your Gender",
+                    ),
                     value: selected,
-                    onChanged: (val){
+                    onChanged: (val) {
                       setState(() {
-                        selected=val!;
+                        selected = val!;
                       });
                     },
-                    items: [
-
-                      DropdownMenuItem(
-                        child: Text("food"),
-                        value: "food",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("office"),
-                        value: "office",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("house"),
-                        value: "house",
-                      ),
-                      DropdownMenuItem(
-                          child: Text("investment"),
-                          value: "investment"
-                      ),
-                      DropdownMenuItem(
-                          child: Text("other"),
-                          value: "other"
-                      ),
-                    ],
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("food"),
+                          value: "food",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("office"),
+                          value: "office",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("house"),
+                          value: "house",
+                        ),
+                        DropdownMenuItem(
+                            child: Text("investment"),
+                            value: "investment"
+                        ),
+                        DropdownMenuItem(
+                            child: Text("other"),
+                            value: "other"
+                        ),
+                      ],
                   ),
-                ],
+                ),
+              ),
+              SizedBox(
+                height: 25,
               ),
               Container(
                 padding: EdgeInsets.only(
@@ -112,31 +163,44 @@ class _transactionState extends State<transaction> {
                   {
                     if (val!.length<=0)
                     {
-                      return "please enter title";
+                      return "Please Enter Title";
                     }
                     return null;
                   },
                   keyboardType: TextInputType.text,
                   style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                  decoration:InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
                         ),
-
-                      ),
-                      hintText: "Title",
-                      hintStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )),
+                        borderSide: BorderSide(color: Colors.black)),
+                    disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    // filled: true,
+                    hintStyle: TextStyle(
+                      // color: Colors.grey[800]
+                    ),
+                    hintText: "Title",
+                  ),
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 25,
               ),
-
               Container(
                 padding: EdgeInsets.only(
                     left: 10,top: 20),
@@ -146,29 +210,43 @@ class _transactionState extends State<transaction> {
                   {
                     if (val!.length<=0)
                     {
-                      return "please enter remark";
+                      return "Please Enter Remark";
                     }
                     return null;
                   },
                   keyboardType: TextInputType.text,
                   style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                  decoration:InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
                         ),
-                      ),
-
-                      hintText: "Remark",
-                      hintStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )),
+                        borderSide: BorderSide(color: Colors.black)),
+                    disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    // filled: true,
+                    hintStyle: TextStyle(
+                      // color: Colors.grey[800]
+                    ),
+                    hintText: "Remark",
+                  ),
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 25,
               ),
               Container(
                 padding: EdgeInsets.only(
@@ -179,112 +257,149 @@ class _transactionState extends State<transaction> {
                   {
                     if (val!.length<=0)
                     {
-                      return "please enter remark";
+                      return "Please Enter Amount";
                     }
                     return null;
                   },
                   keyboardType: TextInputType.number,
                   style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                  decoration:InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
                         ),
-                      ),
-
-                      hintText: "Amount",
-                      hintStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )),
+                        borderSide: BorderSide(color: Colors.black)),
+                    disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    // filled: true,
+                    hintStyle: TextStyle(
+                      // color: Colors.grey[800]
+                    ),
+                    hintText: "Amount",
+                  ),
                 ),
+              ),
+              SizedBox(
+                height: 25,
               ),
               Container(
-                padding: EdgeInsets.all(15),
-                height: MediaQuery.of(context).size.width / 3,
-                child: Center(
-                  child: TextFormField(
-                    style: TextStyle(color: Colors.black),
-                    controller: _dateinput ,
-                    //editing controller of this TextField
-                    decoration: InputDecoration(
-
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.black,
-
-                          ),
+                padding: EdgeInsets.only(
+                    left: 10,top: 20),
+                child: TextFormField(
+                  controller: _dateinput,
+                  validator: (val)
+                  {
+                    if (val!.length<=0)
+                    {
+                      return "Please Enter Date";
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text,
+                  style: TextStyle(color: Colors.black),
+                  decoration:InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
                         ),
-                        icon: Icon(Icons.calendar_today), //icon of text field
-                        labelText: "Enter Date" //label text of field
+                        borderSide: BorderSide(color: Colors.black)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.black)),
+                    // filled: true,
+                    hintStyle: TextStyle(
+                      // color: Colors.grey[800]
                     ),
-                    readOnly: true,
-                    //set it true, so that user will not able to edit text
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1950),
-                          //DateTime.now() - not to allow to choose before today.
-                          lastDate: DateTime(2100));
-
-                      if (pickedDate != null) {
-                        print(
-                            pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                        String formattedDate =
-                        DateFormat('dd-MM-yyyy').format(pickedDate);
-                        print(
-                            formattedDate); //formatted date output using intl package =>  2021-03-16
-                        setState(() {
-
-                          _dateinput.text =
-                              formattedDate; //set output date to TextField value.
-                        });
-                      } else {}
-                    },
+                    hintText: "date",
                   ),
+                  onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      //DateTime.now() - not to allow to choose before today.
+                      lastDate: DateTime(2100));
+
+                  if (pickedDate != null) {
+                    print(
+                        pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                    String formattedDate =
+                    DateFormat('dd-MM-yyyy').format(pickedDate);
+                    print(
+                        formattedDate); //formatted date output using intl package =>  2021-03-16
+                    setState(() {
+
+                      _dateinput.text =
+                          formattedDate; //set output date to TextField value.
+                    });
+                  } else {}
+                },
                 ),
               ),
+              SizedBox(
+                height: 25,
+              ),
               Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffFE7551),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10,),
+                child: Container(
+                  width: 250,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30,),
+                      ),
                     ),
-                  ),
-                  onPressed: () async{
-                    if(formkey.currentState!.validate()){
-                      var title =_title.text.toString();
-                      var remark =_remark.text.toString();
-                      var date =_dateinput.text.toString();
-                      var Amount = _Amount.text.toString();
-                      var type= grp;
-                      var ctaegory = selected;
+                    onPressed: () async{
 
-                      Databasehandler obj = new Databasehandler();
-                      var status = await obj.inserttarnsaction(title,remark,date,Amount,type,ctaegory);
-                      print("Record inserted at : "+ status.toString());
-                    }
-                  },
+                      if(formkey.currentState!.validate()){
+                        var title =_title.text.toString();
+                        var remark =_remark.text.toString();
+                        var date =_dateinput.text.toString();
+                        var Amount = _Amount.text.toString();
+                        var type= grp;
+                        var ctaegory = selected;
 
-                  child: Text("SUBMIT",style: TextStyle(fontSize: 35.0,),),),
+                        Databasehandler obj = new Databasehandler();
+                        var status = await obj.inserttarnsaction(title,remark,date,Amount,type,ctaegory);
+                        print("Record Inserted at : "+ status.toString());
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
+                      }
+                    },
+
+                    child: Text("Add",style: TextStyle(fontSize: 30.0,),),),
+                ),
               ),
             ],
           ),
         ),
       ),
-
       ),
-
     );
   }
 }

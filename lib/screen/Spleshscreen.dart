@@ -37,29 +37,44 @@ class _SpleshscreenState extends State<Spleshscreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(seconds: 10), () {
       checklogin();
     });
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff12bfa2),
       appBar: AppBar(
-        title: Center(child: Text("Spleshscreen",style: TextStyle(fontSize: 30,color: Colors.white),)),
+        title: Center(child: Text("Spleshscreen",style: TextStyle(fontSize: 25,color: Colors.white),)),
+        backgroundColor: Colors.blue.shade100, // Background color
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30), // Rounded corners at the bottom
+            )),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.teal, Colors.teal.shade100],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 100,
-              width: 100,
+            SizedBox(
+              height: 200,
             ),
-            Container(
-              padding: EdgeInsets.only(left: 70, top: 100),
-              child: Text(
-                'WELCOM TO\nExpence Manager',
-                style: TextStyle(color: Colors.black87, fontSize: 30),
+            Center(
+              child: Container(
+                height: 200,
+                width: 300,
+                child: Image.asset("img/demo.jpg"),
+
               ),
             ),
           ],

@@ -52,6 +52,22 @@ class _HomePageState extends State<HomePage> {
             },
           )
         ],
+        backgroundColor: Colors.blue.shade100,
+        // Background color
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(30), // Rounded corners at the bottom
+        )),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.teal, Colors.teal.shade100],
+            ),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
           // isExtended: true,
@@ -64,45 +80,82 @@ class _HomePageState extends State<HomePage> {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => transaction()));
           }),
-      body:
-             Column(
-               children: [
-                 SizedBox(
-                   height: 15,
-                 ),
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: [
-                     ElevatedButton(onPressed: (){
-                       setState(() {
-                         alltransaction = getdata("all");
-                       });
-                     },
-                         child: Text("ALL")),
-                     ElevatedButton(onPressed: (){
-                       setState(() {
-                         alltransaction = getdata("income");
-                       });
-                     },
-                         child: Text("INCOME")),
-                     ElevatedButton(onPressed: (){
-                       setState(() {
-                         alltransaction = getdata("expense");
-                       });
-                     },
-                         child: Text("EXPENSE")),
-                   ],
-                 ),
-
-                 Expanded(
-                   child: FutureBuilder(
-          future: alltransaction,
-          builder: (context, snapshots) {
-            if (snapshots.hasData) {
+      body: Column(
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: 100,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          30,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        alltransaction = getdata("all");
+                      });
+                    },
+                    child: Text("ALL")),
+              ),
+              Container(
+                width: 100,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          30,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        alltransaction = getdata("income");
+                      });
+                    },
+                    child: Text("INCOME")),
+              ),
+              Container(
+                width: 100,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          30,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        alltransaction = getdata("expense");
+                      });
+                    },
+                    child: Text("EXPENSE")),
+              ),
+            ],
+          ),
+          Expanded(
+            child: FutureBuilder(
+                future: alltransaction,
+                builder: (context, snapshots) {
+                  if (snapshots.hasData) {
                     if (snapshots.data!.length == 0) {
                       return Container(
                         child: Center(
-                          child: Text("No data found",style: TextStyle(fontSize: 18,color: Colors.red),),
+                          child: Text(
+                            "No data found",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
                         ),
                       );
                     } else {
@@ -114,32 +167,35 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                  color: (snapshots.data![index]["type"].toString()=="income")
-                                      ?Colors.green.shade50
-                                      :Colors.red.shade50
-                              ),
+                                  color: (snapshots.data![index]["type"]
+                                              .toString() ==
+                                          "income")
+                                      ? Colors.green.shade50
+                                      : Colors.red.shade50),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                    ],
+                                    children: [],
                                   ),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        snapshots.data![index]["title"].toString(),
+                                        snapshots.data![index]["title"]
+                                            .toString(),
                                         style: TextStyle(
-                                            fontSize: 30,
-                                            color: Colors.lightGreenAccent),
+                                            fontSize: 30, color: Colors.black),
                                       ),
                                       Text(
-                                        snapshots.data![index]["Amount"].toString(),
+                                        snapshots.data![index]["Amount"]
+                                            .toString(),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
@@ -152,7 +208,8 @@ class _HomePageState extends State<HomePage> {
                                   Row(
                                     children: [
                                       Text(
-                                        snapshots.data![index]["ctaegory"].toString(),
+                                        snapshots.data![index]["ctaegory"]
+                                            .toString(),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
@@ -165,7 +222,8 @@ class _HomePageState extends State<HomePage> {
                                   Row(
                                     children: [
                                       Text(
-                                        snapshots.data![index]["remark"].toString(),
+                                        snapshots.data![index]["remark"]
+                                            .toString(),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
@@ -176,16 +234,19 @@ class _HomePageState extends State<HomePage> {
                                     height: 15,
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        snapshots.data![index]["type"].toString(),
+                                        snapshots.data![index]["type"]
+                                            .toString(),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
                                       ),
                                       Text(
-                                        snapshots.data![index]["date"].toString(),
+                                        snapshots.data![index]["date"]
+                                            .toString(),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
@@ -200,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       CircleAvatar(
                                         radius: 30,
-                                        backgroundColor: Colors.black12,
+                                        backgroundColor: Colors.white,
                                         child: IconButton(
                                           onPressed: () {
                                             AlertDialog alert = new AlertDialog(
@@ -208,20 +269,21 @@ class _HomePageState extends State<HomePage> {
                                               actions: [
                                                 ElevatedButton(
                                                   onPressed: () async {
-                                                    var id = snapshots.data![index]
-                                                            ["tid"]
+                                                    var id = snapshots
+                                                        .data![index]["tid"]
                                                         .toString();
                                                     Databasehandler obj =
                                                         new Databasehandler();
                                                     var status = await obj
                                                         .deletetarnsaction(id);
-
                                                     if (status == 1) {
                                                       setState(() {
-                                                        alltransaction = getdata("all");
+                                                        alltransaction =
+                                                            getdata("all");
                                                       });
                                                     } else {
-                                                      print("Record not deleted ");
+                                                      print(
+                                                          "Record not deleted ");
                                                     }
                                                     Navigator.of(context).pop();
                                                   },
@@ -241,7 +303,10 @@ class _HomePageState extends State<HomePage> {
                                                   return alert;
                                                 });
                                           },
-                                          icon: Icon(Icons.delete,),
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -249,10 +314,11 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       CircleAvatar(
                                         radius: 30,
-                                        backgroundColor: Colors.black12,
+                                        backgroundColor: Colors.white,
                                         child: IconButton(
                                           onPressed: () {
-                                            var id = snapshots.data![index]["tid"]
+                                            var id = snapshots.data![index]
+                                                    ["tid"]
                                                 .toString();
 
                                             Navigator.of(context).push(
@@ -262,7 +328,10 @@ class _HomePageState extends State<HomePage> {
                                                           updateid: id,
                                                         )));
                                           },
-                                          icon: Icon(Icons.update),
+                                          icon: Icon(
+                                            Icons.update,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -274,15 +343,15 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     }
-            } else {
+                  } else {
                     return Column(
                       children: [CircularProgressIndicator()],
                     );
-            }
-          }),
-                 ),
-               ],
-             ),
+                  }
+                }),
+          ),
+        ],
+      ),
     );
   }
 }

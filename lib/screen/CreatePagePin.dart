@@ -22,9 +22,24 @@ class _CreatePagePinState extends State<CreatePagePin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Center(child: Text("CreatePagePin",style: TextStyle(fontSize: 30),)),
+        title: Center(child: Text("Creat Pin",style: TextStyle(fontSize: 27),)),
+        backgroundColor: Colors.blue.shade100, // Background color
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30), // Rounded corners at the bottom
+            )),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.teal, Colors.teal.shade100],
+            ),
+          ),
+        ),
       ),
       body: Stack(
         children: [
@@ -33,7 +48,7 @@ class _CreatePagePinState extends State<CreatePagePin> {
             padding: EdgeInsets.only(left: 35, top: 100),
             child: Text(
               'CREATE\nPIN',
-              style: TextStyle(color: Colors.white, fontSize: 33),
+              style: TextStyle(color: Colors.black, fontSize: 33),
             ),
           ),
           SingleChildScrollView(
@@ -50,25 +65,34 @@ class _CreatePagePinState extends State<CreatePagePin> {
                         TextField(
                           controller: _pin,
                           keyboardType: TextInputType.number,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
+                          style: TextStyle(color: Colors.black),
+                          decoration:InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
                                 ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Colors.black,
+                                borderSide: BorderSide(color: Colors.black)),
+                            disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
                                 ),
-                              ),
-                              hintText: "PIN",
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )),
+                                borderSide: BorderSide(color: Colors.black)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
+                                borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
+                                borderSide: BorderSide(color: Colors.black)),
+                            // filled: true,
+                            hintStyle: TextStyle(
+                              // color: Colors.grey[800]
+                            ),
+                            hintText: "Enter The Pin",
+                          ),
                         ),
                         SizedBox(
                           height: 30,
@@ -76,70 +100,73 @@ class _CreatePagePinState extends State<CreatePagePin> {
                         TextField(
                           controller: _CONFROMPIN,
                           keyboardType: TextInputType.number,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
                                 ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Colors.black,
+                                borderSide: BorderSide(color: Colors.black)),
+                            disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
                                 ),
-                              ),
-                              hintText: "CONFROM PIN",
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )),
+                                borderSide: BorderSide(color: Colors.black)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
+                                borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
+                                borderSide: BorderSide(color: Colors.black)),
+                            // filled: true,
+                            hintStyle: TextStyle(
+                              // color: Colors.grey[800]
+                            ),
+                            hintText: "Enter The confirmpin",
+                          ),
                         ),
                         SizedBox(
                           height: 40,
                         ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 50.0,
-                              width: 150.0,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xffFE7551),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10,),
-                                  ),
-                                ),
-                                onPressed: () async{
-
-                                  if (_pin.text.toString()==_CONFROMPIN.text.toString() ) {
-
-                                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                                    prefs.setString("islogin", "yes");
-                                    prefs.setString("pin", _pin.text.toString());
-
-
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) => HomePage()));
-                                  }
-                                  else
-                                  {
-                                    Fluttertoast.showToast(msg: "Both must be same",
-                                        toastLength: Toast.LENGTH_LONG,
-                                        gravity: ToastGravity.BOTTOM,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.black87,
-                                        fontSize: 15);
-                                  }
-                                },
-
-                                child: Text("Login",style: TextStyle(fontSize: 30.0,),),),
+                        Container(
+                          width: 250,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.teal,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20,),
+                              ),
                             ),
-                          ],
+                            onPressed: () async{
+
+                              if (_pin.text.toString()==_CONFROMPIN.text.toString() ) {
+
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.setString("islogin", "yes");
+                                prefs.setString("pin", _pin.text.toString());
+
+
+                                Navigator.of(context).pop();
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => HomePage()));
+                              }
+                              else
+                              {
+                                Fluttertoast.showToast(msg: "Both must be same",
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.BOTTOM,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.black87,
+                                    fontSize: 15);
+                              }
+                            },
+
+                            child: Text("Login",style: TextStyle(fontSize: 30.0,),),),
                         ),
                       ],
                     ),
