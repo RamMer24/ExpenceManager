@@ -1,3 +1,5 @@
+import 'package:expencemanager/screen/ImageDwonload.dart';
+import 'package:expencemanager/screen/VideoSave.dart';
 import 'package:flutter/material.dart';
 
 import 'screen/Balancepage.dart';
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:Spleshscreen(),
+      home:ImageSaver(),
     );
   }
 }

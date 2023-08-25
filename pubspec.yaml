@@ -43,7 +43,13 @@ dependencies:
   fluttertoast: ^8.1.2
   shared_preferences:
   dropdown_textfield:
-
+  gallery_saver:
+  dio:
+  http: ^0.13.3
+  archive:
+  image_gallery_saver:
+  image_picker:
+  video_player:
 
 flutter_icons:
   android: "launcher_icon"

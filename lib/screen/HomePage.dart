@@ -320,7 +320,6 @@ class _HomePageState extends State<HomePage> {
                                             var id = snapshots.data![index]
                                                     ["tid"]
                                                 .toString();
-
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
