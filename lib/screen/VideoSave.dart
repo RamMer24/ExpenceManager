@@ -32,7 +32,8 @@ class _VideoSaverState extends State<VideoSaver> {
     videoController = VideoPlayerController.asset("assets/sample_video.mp4")
       ..initialize().then((_) {
         setState(() {});
-      });
+      }
+      );
   }
 
   @override
@@ -55,7 +56,6 @@ class _VideoSaverState extends State<VideoSaver> {
       }
     });
   }
-
   Future<void> _saveVideo() async {
     if (videoFile != null) {
       final result = await GallerySaver.saveVideo(videoFile!.path);
@@ -69,7 +69,6 @@ class _VideoSaverState extends State<VideoSaver> {
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

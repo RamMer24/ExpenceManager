@@ -1,6 +1,10 @@
 import 'package:expencemanager/screen/ImageDwonload.dart';
+import 'package:expencemanager/screen/SCROLL.dart';
+import 'package:expencemanager/screen/Stack.dart';
 import 'package:expencemanager/screen/VideoSave.dart';
+import 'package:expencemanager/screen/maltoform.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import 'screen/Balancepage.dart';
 import 'screen/CreatePagePin.dart';
@@ -24,14 +28,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home:ImageSaver(),
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primaryColor: Colors.black.withOpacity(0.4),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home:maltoform(),
+
+      );
+    }
     );
   }
 }
+
 
